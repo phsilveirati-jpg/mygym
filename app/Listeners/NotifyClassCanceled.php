@@ -6,12 +6,8 @@ use App\Events\ClassCanceled;
 use App\Jobs\NotifyClassCanceledJob;
 use App\Mail\ClassCanceledMail;
 use App\Notifications\ClassCanceledNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Notification;
 
 class NotifyClassCanceled
 {
@@ -44,6 +40,6 @@ class NotifyClassCanceled
         //Notification::send($members, new ClassCanceledNotification($details));
 
         /*This way is using Jobs*/
-        NotifyClassCanceledJob::dispatch($members,$details);
+        NotifyClassCanceledJob::dispatch($members, $details);
     }
 }

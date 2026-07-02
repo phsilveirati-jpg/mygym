@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-
     public function index()
     {
         $bookings = auth()->user()->bookings()->upcoming()->get();
+
         return view('member.upcoming')->with('bookings', $bookings);
     }
 
@@ -20,6 +20,7 @@ class BookingController extends Controller
             ->with('classType', 'instructor')
             ->notbooked()
             ->oldest('date_time')->get();
+
         return view('member.book')->with('scheduledClasses', $scheduledClasses);
     }
 
@@ -27,12 +28,14 @@ class BookingController extends Controller
     {
         auth()->user()->bookings()->attach(
             $request->scheduled_class_id);
+
         return redirect()->route('booking.index');
     }
 
     public function destroy(int $id)
     {
         auth()->user()->bookings()->detach($id);
+
         return redirect()->route('booking.index');
     }
 }

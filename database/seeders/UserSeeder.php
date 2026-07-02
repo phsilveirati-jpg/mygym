@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
         ]);
         User::factory()->count(10)->create();
         User::factory()->count(10)->create([
-            'role' => 'instructor'
+            'role' => 'instructor',
         ]);
     }
 }

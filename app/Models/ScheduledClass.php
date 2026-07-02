@@ -6,35 +6,40 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class ScheduledClass extends Model
 {
     protected $guarded = ['id'];
+
     use HasFactory;
 
     protected $casts = [
-       'date_time' => 'datetime'
+        'date_time' => 'datetime',
     ];
 
-    public function classType(){
+    public function classType()
+    {
         return $this->belongsTo(ClassType::class);
     }
 
-    public function instructor(){
+    public function instructor()
+    {
         return $this->belongsTo(User::class, 'instructor_id');
     }
 
-    public function members(){
+    public function members()
+    {
         return $this->belongsToMany(User::class, 'bookings');
     }
 
-    public function scopeUpcoming(Builder $query){
-        return $query->where('date_time','>',now());
+    public function scopeUpcoming(Builder $query)
+    {
+        return $query->where('date_time', '>', now());
     }
 
-    public function scopeNotBooked(Builder $query){
-        return $query->whereDoesntHave('members',function($query){
-            $query->where('user_id',auth()->user()->id);
+    public function scopeNotBooked(Builder $query)
+    {
+        return $query->whereDoesntHave('members', function ($query) {
+            $query->where('user_id', auth()->user()->id);
         });
     }
 }

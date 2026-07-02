@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('scheduled_classes', function (Blueprint $table) {
-            $table->renameColumn('data_time','date_time');
+            $table->renameColumn('data_time', 'date_time');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('scheduled_classes', function (Blueprint $table) {
-            $table->renameColumn('date_time','date_time');
+            $table->renameColumn('date_time', 'date_time');
         });
     }
 };

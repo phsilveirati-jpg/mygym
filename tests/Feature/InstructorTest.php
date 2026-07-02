@@ -7,7 +7,6 @@ use App\Models\ScheduledClass;
 use App\Models\User;
 use Database\Seeders\ClassTypeSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class InstructorTest extends TestCase
@@ -17,7 +16,7 @@ class InstructorTest extends TestCase
     public function test_instructor_is_redirected_to_instructor_dashboard(): void
     {
         $user = User::factory()->create([
-            'role' => 'instructor'
+            'role' => 'instructor',
         ]);
 
         $response = $this->ActingAs($user)->get('dashboard');
@@ -30,7 +29,7 @@ class InstructorTest extends TestCase
     public function test_instructor_can_schedule_a_class()
     {
         $user = User::factory()->create([
-            'role' => 'instructor'
+            'role' => 'instructor',
         ]);
 
         $this->seed(ClassTypeSeeder::class);
@@ -54,7 +53,7 @@ class InstructorTest extends TestCase
     {
         //Given
         $user = User::factory()->create([
-            'role' => 'instructor'
+            'role' => 'instructor',
         ]);
 
         $this->seed(ClassTypeSeeder::class);
@@ -66,7 +65,7 @@ class InstructorTest extends TestCase
         ]);
 
         //when
-        $response = $this->actingAs($user)->delete('/instructor/schedule/' . $scheduledClass->id);
+        $response = $this->actingAs($user)->delete('/instructor/schedule/'.$scheduledClass->id);
 
         //Then
         $this->assertDatabaseMissing('scheduled_classes', [
@@ -79,7 +78,7 @@ class InstructorTest extends TestCase
     {
         //Given
         $user = User::factory()->create([
-            'role' => 'instructor'
+            'role' => 'instructor',
         ]);
 
         $this->seed(ClassTypeSeeder::class);
@@ -88,14 +87,14 @@ class InstructorTest extends TestCase
         $scheduledClass = ScheduledClass::create([
             'instructor_id' => $user->id,
             'class_type_id' => ClassType::first()->id,
-            'date_time' => now()->addHours(1)->minute(0)->second(0)
+            'date_time' => now()->addHours(1)->minute(0)->second(0),
         ]);
 
         $response = $this->actingAs($user)->get('instructor/schedule');
 
         $response->assertDontSeeText('Cancel');
 
-        $response = $this->actingAs($user)->delete('/instructor/schedule/' . $scheduledClass->id);
+        $response = $this->actingAs($user)->delete('/instructor/schedule/'.$scheduledClass->id);
 
         //Then
         $this->assertDatabaseHas('scheduled_classes', ['id' => $scheduledClass->id]);

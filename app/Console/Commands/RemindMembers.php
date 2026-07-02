@@ -39,6 +39,6 @@ class RemindMembers extends Command
             $members->toArray()
         );*/
 
-        Notification::send($members, new RemindMembersNotification());
+        Notification::send($members, new RemindMembersNotification);
     }
 }
