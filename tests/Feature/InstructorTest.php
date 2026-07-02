@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class InstructorTest extends TestCase
 {
-    use refreshDatabase;
+    use RefreshDatabase;
 
     public function test_instructor_is_redirected_to_instructor_dashboard(): void
     {
@@ -23,7 +23,7 @@ class InstructorTest extends TestCase
 
         $response->assertRedirectToRoute('instructor.dashboard');
 
-        $this->followRedirects($response)->assertSeeText('Welcome Instructor');
+        $this->followRedirects($response)->assertSeeText('Instructor Dashboard');
     }
 
     public function test_instructor_can_schedule_a_class()
@@ -34,15 +34,17 @@ class InstructorTest extends TestCase
 
         $this->seed(ClassTypeSeeder::class);
 
+        $dateTime = now()->addWeek()->setTime(17, 0, 0);
+
         $response = $this->ActingAs($user)->post('instructor/schedule', [
             'class_type_id' => ClassType::first()->id,
-            'date' => '2025-01-03',
-            'time' => '17:00:00',
+            'date' => $dateTime->toDateString(),
+            'time' => $dateTime->format('H:i:s'),
         ]);
 
         $this->assertDatabaseHas('scheduled_classes', [
             'class_type_id' => ClassType::first()->id,
-            'date_time' => '2025-01-03 17:00:00',
+            'date_time' => $dateTime->format('Y-m-d H:i:s'),
         ]);
 
         $response->assertRedirectToRoute('schedule.index');
@@ -61,7 +63,7 @@ class InstructorTest extends TestCase
         $scheduledClass = ScheduledClass::create([
             'instructor_id' => $user->id,
             'class_type_id' => ClassType::first()->id,
-            'date_time' => '2025-01-04 12:00:00',
+            'date_time' => now()->addWeek()->setTime(12, 0, 0),
         ]);
 
         //when
