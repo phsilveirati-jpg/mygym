@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\ClassCanceled;
 use App\Listeners\NotifyClassCanceled;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
@@ -25,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(
-                NotifyClassCanceled::class,
+            NotifyClassCanceled::class,
         );
 
         Gate::define('schedule-class', function (User $user) {

@@ -46,12 +46,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function scheduledClasses(){
-        return $this->hasMany(ScheduledClass::class,'instructor_id');
+    public function scheduledClasses()
+    {
+        return $this->hasMany(ScheduledClass::class, 'instructor_id');
     }
 
-    public function bookings(){
-        return $this->belongsToMany(ScheduledClass::class,'bookings')->withTimestamps();
+    public function bookings()
+    {
+        return $this->belongsToMany(ScheduledClass::class, 'bookings')->withTimestamps();
     }
 
     public function hasRole($role)
@@ -59,6 +61,7 @@ class User extends Authenticatable
         if (is_array($role)) {
             return in_array($this->role, $role);
         }
+
         return $this->role === $role;
     }
 }

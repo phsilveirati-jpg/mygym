@@ -15,9 +15,10 @@ class CheckUserRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if(auth()->user()->role !== $role ){
-             return redirect()->route('dashboard');
+        if (auth()->user()->role !== $role) {
+            return redirect()->route('dashboard');
         }
+
         return $next($request);
     }
 }

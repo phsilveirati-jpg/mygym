@@ -2,10 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\ClassType;
-use App\Models\ScheduledClass;
-use App\Models\User;
-
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

@@ -9,22 +9,23 @@ use Illuminate\Http\Request;
 
 class ScheduleClassController extends Controller
 {
-
     public function index()
     {
         $scheduledClasses = auth()->user()->scheduledClasses()->upcoming()->oldest('date_time')->get();
+
         return view('instructor.upcoming')->with('scheduledClasses', $scheduledClasses);
     }
 
     public function create()
     {
         $classTypes = ClassType::all();
+
         return view('instructor.schedule')->with('classTypes', $classTypes);
     }
 
     public function store(Request $request)
     {
-        $date_time = $request->input('date') . ' ' . $request->input('time');
+        $date_time = $request->input('date').' '.$request->input('time');
 
         $request->merge([
             'date_time' => $date_time,
@@ -55,6 +56,4 @@ class ScheduleClassController extends Controller
 
         return redirect()->route('schedule.index');
     }
-
-
 }

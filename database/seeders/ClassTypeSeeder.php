@@ -15,22 +15,22 @@ class ClassTypeSeeder extends Seeder
         ClassType::create([
             'name' => 'Pilates',
             'description' => fake()->text(),
-            'minutes' => 60
+            'minutes' => 60,
         ]);
         ClassType::create([
             'name' => 'Dance Fitness',
             'description' => fake()->text(),
-            'minutes' => 45
+            'minutes' => 45,
         ]);
         ClassType::create([
             'name' => 'Yoga',
             'description' => fake()->text(),
-            'minutes' => 30
+            'minutes' => 30,
         ]);
         ClassType::create([
             'name' => 'Boxing',
             'description' => fake()->text(),
-            'minutes' => 60
+            'minutes' => 60,
         ]);
     }
 }

@@ -1,5 +1,8 @@
 /.phpunit.cache
 /node_modules
+/.tmp
+/.npm-cache
+/docker-compose.override.yml
 /public/build
 /public/hot
 /public/storage

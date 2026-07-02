@@ -14,7 +14,7 @@ class NotifyClassCanceledJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public $members,public Array $details)
+    public function __construct(public $members, public array $details)
     {
         //
     }
