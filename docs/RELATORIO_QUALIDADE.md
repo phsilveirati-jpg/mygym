@@ -525,20 +525,18 @@ Atencao: remover volume apaga os dados do banco daquele volume.
 
 ## 20. Conclusao
 
-A melhoria de qualidade foi implementada com sucesso do ponto de vista do codigo:
+A melhoria de qualidade foi implementada com sucesso na parte versionavel do projeto, incluindo configuracao do Laravel Pint, scripts de qualidade, padronizacao automatica do codigo e documentacao tecnica.
+
+A validacao completa dentro do Docker permaneceu pendente por instabilidade operacional do Docker Desktop, devidamente registrada como risco e mitigada temporariamente com execucao local da aplicacao.
+
+Como resultado, o projeto ficou com:
 
 ```text
 Laravel Pint configurado.
 Scripts de qualidade adicionados.
-Codigo formatado.
-Relatorio criado.
+Codigo PHP padronizado automaticamente.
+Relatorio tecnico criado.
 npm funcionando.
 Build frontend funcionando.
 Aplicacao demonstravel em http://localhost:8081/.
-```
-
-A unica pendencia relevante e operacional:
-
-```text
-Corrigir o Docker Desktop para permitir a validacao final dentro do container laravel.test.
 ```
